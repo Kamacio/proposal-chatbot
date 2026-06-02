@@ -10,7 +10,7 @@
       width: 64px;
       height: 64px;
       border-radius: 50%;
-      background-image: url('background-image: url('https://proposal-chatbot.vercel.app/neo-avatar.png');');
+      background-image: url('https://proposal-chatbot.vercel.app/neo-avatar.png');
       background-size: cover;
       background-position: center;
       cursor: pointer;
@@ -63,7 +63,6 @@
     }
 
     @media(max-width:768px) {
-
       #neo-widget-chat {
         width: 100%;
         height: 100%;
@@ -91,8 +90,8 @@
   popup.id = 'neo-widget-popup';
 
   popup.innerHTML = `
-    <strong>Dubbi?</strong><br>
-    Chiedi a NEO, gli abbiamo spiegato tutto👋
+    <strong>Ciao, sono NEO 👋</strong><br>
+    Posso aiutarti a capire meglio questa proposta.
   `;
 
   document.body.appendChild(popup);
@@ -112,20 +111,18 @@
   chat.id = 'neo-widget-chat';
 
   chat.innerHTML = `
-    <iframe src="<iframe src="https://proposal-chatbot.vercel.app"></iframe>"></iframe>
+    <iframe src="https://proposal-chatbot.vercel.app"></iframe>
   `;
 
   document.body.appendChild(chat);
 
   button.addEventListener('click', () => {
-
     if (chat.style.display === 'block') {
       chat.style.display = 'none';
     } else {
       chat.style.display = 'block';
       popup.style.display = 'none';
     }
-
   });
 
 })();
