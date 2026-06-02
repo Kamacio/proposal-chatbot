@@ -10,7 +10,7 @@
       width: 64px;
       height: 64px;
       border-radius: 50%;
-      background-image: url('https://newborn-academy-chatbot.vercel.app/neo-avatar.png');
+      background-image: url('background-image: url('https://proposal-chatbot.vercel.app/neo-avatar.png');');
       background-size: cover;
       background-position: center;
       cursor: pointer;
@@ -91,8 +91,8 @@
   popup.id = 'neo-widget-popup';
 
   popup.innerHTML = `
-    <strong>Ciao, sono NEO 👋</strong><br>
-    Posso aiutarti a orientarti nella Newborn Academy.
+    <strong>Dubbi?</strong><br>
+    Chiedi a NEO, gli abbiamo spiegato tutto👋
   `;
 
   document.body.appendChild(popup);
@@ -112,7 +112,7 @@
   chat.id = 'neo-widget-chat';
 
   chat.innerHTML = `
-    <iframe src="https://newborn-academy-chatbot.vercel.app"></iframe>
+    <iframe src="<iframe src="https://proposal-chatbot.vercel.app"></iframe>"></iframe>
   `;
 
   document.body.appendChild(chat);
