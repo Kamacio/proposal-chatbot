@@ -1,5 +1,7 @@
 (function () {
 
+  const CHATBOT_URL = 'https://proposal-chatbot-8085q7le0-mauro-s-projects15.vercel.app';
+
   const style = document.createElement('style');
 
   style.innerHTML = `
@@ -10,7 +12,7 @@
       width: 64px;
       height: 64px;
       border-radius: 50%;
-      background-image: url('https://proposal-chatbot.vercel.app/neo-avatar.png');
+      background-image: url('${CHATBOT_URL}/neo-avatar.png');
       background-size: cover;
       background-position: center;
       cursor: pointer;
@@ -86,7 +88,6 @@
   document.head.appendChild(style);
 
   const popup = document.createElement('div');
-
   popup.id = 'neo-widget-popup';
 
   popup.innerHTML = `
@@ -101,17 +102,14 @@
   }, 5000);
 
   const button = document.createElement('div');
-
   button.id = 'neo-widget-button';
-
   document.body.appendChild(button);
 
   const chat = document.createElement('div');
-
   chat.id = 'neo-widget-chat';
 
   chat.innerHTML = `
-    <iframe src="https://proposal-chatbot.vercel.app"></iframe>
+    <iframe src="${CHATBOT_URL}"></iframe>
   `;
 
   document.body.appendChild(chat);
