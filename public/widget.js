@@ -44,23 +44,31 @@
       transform: translateY(0);
     }
 
-    #neo-widget-popup strong {
-      font-weight: 700;
-    }
-
-    .neo-popup-close {
+    .neo-popup-close,
+    #neo-widget-chat-close {
       position: absolute;
       top: 10px;
       right: 12px;
-      font-size: 18px;
+      font-size: 22px;
       line-height: 1;
       cursor: pointer;
       opacity: 0.55;
-      transition: opacity .2s ease;
+      z-index: 1000000;
+      font-family: Arial, sans-serif;
     }
 
-    .neo-popup-close:hover {
-      opacity: 1;
+    #neo-widget-chat-close {
+      position: fixed;
+      top: 18px;
+      right: 20px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.12);
+      color: #111;
+      display: none;
+      align-items: center;
+      justify-content: center;
     }
 
     #neo-widget-chat {
@@ -82,7 +90,6 @@
       width: 100%;
       height: 100%;
       border: none;
-      background: #f7f3ec;
     }
 
     @media(max-width:768px) {
@@ -94,12 +101,17 @@
         border-radius: 0;
       }
 
+      #neo-widget-chat-close {
+        display: none;
+        top: 14px;
+        right: 14px;
+      }
+
       #neo-widget-popup {
         right: 15px;
         bottom: 90px;
         max-width: 220px;
         font-size: 13px;
-        padding: 14px 38px 14px 16px;
       }
 
       #neo-widget-button {
@@ -113,19 +125,14 @@
 
   const popup = document.createElement('div');
   popup.id = 'neo-widget-popup';
-
   popup.innerHTML = `
     <div class="neo-popup-close">×</div>
     <strong>Ciao, sono NEO 👋</strong><br>
     Posso aiutarti a capire meglio questa proposta.
   `;
-
   document.body.appendChild(popup);
 
-  const closeButton = popup.querySelector('.neo-popup-close');
-
-  closeButton.addEventListener('click', function () {
-    popup.classList.remove('show');
+  popup.querySelector('.neo-popup-close').addEventListener('click', function () {
     popup.style.display = 'none';
   });
 
@@ -143,20 +150,33 @@
 
   const chat = document.createElement('div');
   chat.id = 'neo-widget-chat';
-
-  chat.innerHTML = `
-    <iframe src="${CHATBOT_URL}"></iframe>
-  `;
-
+  chat.innerHTML = `<iframe src="${CHATBOT_URL}"></iframe>`;
   document.body.appendChild(chat);
+
+  const closeChat = document.createElement('div');
+  closeChat.id = 'neo-widget-chat-close';
+  closeChat.innerHTML = '×';
+  document.body.appendChild(closeChat);
+
+  function openChat() {
+    chat.style.display = 'block';
+    closeChat.style.display = 'flex';
+    popup.style.display = 'none';
+  }
+
+  function closeChatBox() {
+    chat.style.display = 'none';
+    closeChat.style.display = 'none';
+  }
 
   button.addEventListener('click', function () {
     if (chat.style.display === 'block') {
-      chat.style.display = 'none';
+      closeChatBox();
     } else {
-      chat.style.display = 'block';
-      popup.style.display = 'none';
+      openChat();
     }
   });
+
+  closeChat.addEventListener('click', closeChatBox);
 
 })();
