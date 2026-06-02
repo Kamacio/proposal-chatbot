@@ -1,6 +1,6 @@
 (function () {
 
-  const CHATBOT_URL = 'https://proposal-chatbot-8085q7le0-mauro-s-projects15.vercel.app';
+  const CHATBOT_URL = 'https://proposal-chatbot-plum.vercel.app';
 
   const style = document.createElement('style');
 
