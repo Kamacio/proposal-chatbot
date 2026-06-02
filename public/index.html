@@ -362,18 +362,17 @@ button {
         </div>
       `;
 
-      if (hasLeadIntent(text) && !document.querySelector('.lead-form')) {
-        leadSent = false; // reset per ogni nuova istanza del form
-        chat.innerHTML += `
-          <div class="bot-row">
-            <div class="neo-avatar small">N</div>
-            <div class="message bot">
-              Se vuoi, puoi lasciarmi i tuoi dati e ti mandiamo le informazioni più adatte al tuo caso.
-              ${leadFormHTML()}
-            </div>
-          </div>
-        `;
-      }
+      if (hasLeadIntent(text)) {
+  chat.innerHTML += `
+    <div class="bot-row">
+      <div class="neo-avatar small">N</div>
+      <div class="message bot">
+        Se ti interessa approfondire, rispondi direttamente al messaggio con cui hai ricevuto questa pagina.
+        Così possiamo capire se ha senso costruire una proposta su misura per il tuo brand.
+      </div>
+    </div>
+  `;
+}
 
       chat.scrollTop = chat.scrollHeight;
     }
