@@ -21,61 +21,68 @@
     }
 
     #neo-widget-popup {
-  position: fixed;
-  bottom: 95px;
-  right: 20px;
-  background: #1d1d1d;
-  color: white;
-  padding: 14px 18px;
-  border-radius: 18px;
-  max-width: 260px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  z-index: 999999;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all .3s ease;
-  position: relative;
-}
+      position: fixed;
+      bottom: 95px;
+      right: 20px;
+      background: #1d1d1d;
+      color: white;
+      padding: 18px 42px 18px 18px;
+      border-radius: 18px;
+      max-width: 260px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      z-index: 999999;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all .3s ease;
+    }
 
     #neo-widget-popup.show {
       opacity: 1;
       transform: translateY(0);
     }
-.neo-popup-close {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  font-size: 18px;
-  line-height: 1;
-  cursor: pointer;
-  opacity: 0.45;
-  transition: opacity .2s ease;
-}
 
-.neo-popup-close:hover {
-  opacity: 1;
-}
+    #neo-widget-popup strong {
+      font-weight: 700;
+    }
+
+    .neo-popup-close {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      opacity: 0.55;
+      transition: opacity .2s ease;
+    }
+
+    .neo-popup-close:hover {
+      opacity: 1;
+    }
+
     #neo-widget-chat {
       position: fixed;
       bottom: 100px;
       right: 20px;
-      width: 380px;
+      width: 390px;
       height: 700px;
-      border-radius: 24px;
+      border-radius: 26px;
       overflow: hidden;
-      background: #000;
+      background: #f7f3ec;
       z-index: 999999;
       display: none;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.18);
+      border: 1px solid rgba(20,20,20,0.10);
     }
 
     #neo-widget-chat iframe {
       width: 100%;
       height: 100%;
       border: none;
+      background: #f7f3ec;
     }
 
     @media(max-width:768px) {
@@ -90,6 +97,9 @@
       #neo-widget-popup {
         right: 15px;
         bottom: 90px;
+        max-width: 220px;
+        font-size: 13px;
+        padding: 14px 38px 14px 16px;
       }
 
       #neo-widget-button {
@@ -105,21 +115,27 @@
   popup.id = 'neo-widget-popup';
 
   popup.innerHTML = `
-  <div class="neo-popup-close">×</div>
-
-  <strong>Ciao, sono NEO 👋</strong><br>
-  Posso aiutarti a capire meglio questa proposta.
-`;
+    <div class="neo-popup-close">×</div>
+    <strong>Ciao, sono NEO 👋</strong><br>
+    Posso aiutarti a capire meglio questa proposta.
+  `;
 
   document.body.appendChild(popup);
 
-  setTimeout(() => {
-  popup.classList.add('show');
-}, 1200);
+  const closeButton = popup.querySelector('.neo-popup-close');
 
-setTimeout(() => {
-  popup.classList.remove('show');
-}, 8000);
+  closeButton.addEventListener('click', function () {
+    popup.classList.remove('show');
+    popup.style.display = 'none';
+  });
+
+  setTimeout(function () {
+    popup.classList.add('show');
+  }, 1200);
+
+  setTimeout(function () {
+    popup.classList.remove('show');
+  }, 8000);
 
   const button = document.createElement('div');
   button.id = 'neo-widget-button';
@@ -133,12 +149,8 @@ setTimeout(() => {
   `;
 
   document.body.appendChild(chat);
-const closeButton = popup.querySelector('.neo-popup-close');
 
-closeButton.addEventListener('click', () => {
-  popup.classList.remove('show');
-});
-  button.addEventListener('click', () => {
+  button.addEventListener('click', function () {
     if (chat.style.display === 'block') {
       chat.style.display = 'none';
     } else {
