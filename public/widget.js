@@ -44,31 +44,19 @@
       transform: translateY(0);
     }
 
-    .neo-popup-close,
-    #neo-widget-chat-close {
+    .neo-popup-close {
       position: absolute;
       top: 10px;
       right: 12px;
-      font-size: 22px;
+      font-size: 20px;
       line-height: 1;
       cursor: pointer;
       opacity: 0.55;
-      z-index: 1000000;
       font-family: Arial, sans-serif;
     }
 
-    #neo-widget-chat-close {
-      position: fixed;
-      top: 18px;
-      right: 20px;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.12);
-      color: #111;
-      display: none;
-      align-items: center;
-      justify-content: center;
+    .neo-popup-close:hover {
+      opacity: 1;
     }
 
     #neo-widget-chat {
@@ -92,6 +80,29 @@
       border: none;
     }
 
+    #neo-widget-chat-close {
+      position: fixed;
+      bottom: 765px;
+      right: 34px;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.10);
+      color: #111;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000000;
+      font-family: Arial, sans-serif;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    #neo-widget-chat-close:hover {
+      background: rgba(0,0,0,0.18);
+    }
+
     @media(max-width:768px) {
       #neo-widget-chat {
         width: 100%;
@@ -102,9 +113,10 @@
       }
 
       #neo-widget-chat-close {
-        display: none;
         top: 14px;
         right: 14px;
+        bottom: auto;
+        background: rgba(0,0,0,0.10);
       }
 
       #neo-widget-popup {
@@ -112,6 +124,7 @@
         bottom: 90px;
         max-width: 220px;
         font-size: 13px;
+        padding: 14px 38px 14px 16px;
       }
 
       #neo-widget-button {
@@ -125,11 +138,13 @@
 
   const popup = document.createElement('div');
   popup.id = 'neo-widget-popup';
+
   popup.innerHTML = `
     <div class="neo-popup-close">×</div>
     <strong>Ciao, sono NEO 👋</strong><br>
     Posso aiutarti a capire meglio questa proposta.
   `;
+
   document.body.appendChild(popup);
 
   popup.querySelector('.neo-popup-close').addEventListener('click', function () {
@@ -140,9 +155,11 @@
     popup.classList.add('show');
   }, 1200);
 
-  setTimeout(function () {
-    popup.classList.remove('show');
-  }, 8000);
+  if (window.innerWidth <= 768) {
+    setTimeout(function () {
+      popup.classList.remove('show');
+    }, 8000);
+  }
 
   const button = document.createElement('div');
   button.id = 'neo-widget-button';
