@@ -21,29 +21,43 @@
     }
 
     #neo-widget-popup {
-      position: fixed;
-      bottom: 95px;
-      right: 20px;
-      background: #1d1d1d;
-      color: white;
-      padding: 14px 18px;
-      border-radius: 18px;
-      max-width: 260px;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      line-height: 1.5;
-      z-index: 999999;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      opacity: 0;
-      transform: translateY(10px);
-      transition: all .3s ease;
-    }
+  position: fixed;
+  bottom: 95px;
+  right: 20px;
+  background: #1d1d1d;
+  color: white;
+  padding: 14px 18px;
+  border-radius: 18px;
+  max-width: 260px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  z-index: 999999;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all .3s ease;
+  position: relative;
+}
 
     #neo-widget-popup.show {
       opacity: 1;
       transform: translateY(0);
     }
+.neo-popup-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity .2s ease;
+}
 
+.neo-popup-close:hover {
+  opacity: 1;
+}
     #neo-widget-chat {
       position: fixed;
       bottom: 100px;
@@ -91,15 +105,21 @@
   popup.id = 'neo-widget-popup';
 
   popup.innerHTML = `
-    <strong>Ciao, sono NEO 👋</strong><br>
-    Posso aiutarti a capire meglio questa proposta.
-  `;
+  <div class="neo-popup-close">×</div>
+
+  <strong>Ciao, sono NEO 👋</strong><br>
+  Posso aiutarti a capire meglio questa proposta.
+`;
 
   document.body.appendChild(popup);
 
   setTimeout(() => {
-    popup.classList.add('show');
-  }, 5000);
+  popup.classList.add('show');
+}, 1200);
+
+setTimeout(() => {
+  popup.classList.remove('show');
+}, 8000);
 
   const button = document.createElement('div');
   button.id = 'neo-widget-button';
@@ -113,7 +133,11 @@
   `;
 
   document.body.appendChild(chat);
+const closeButton = popup.querySelector('.neo-popup-close');
 
+closeButton.addEventListener('click', () => {
+  popup.classList.remove('show');
+});
   button.addEventListener('click', () => {
     if (chat.style.display === 'block') {
       chat.style.display = 'none';
